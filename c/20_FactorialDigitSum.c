@@ -10,23 +10,40 @@ Find the sum of the digits in the number 100!
 #include <stdio.h>
 #include <stdlib.h>
 
+/* Declarations and definitions */
 #define size_of_number 160
 #define question 100
 #define base 10
-
-//Function Prototypes
 void initialise(int[]);
 int sum_of_digits(int[]);
 void factorial(int[],int);
 
-//Initially, the number is 0 so all it's digits are set to zero.
-void initialise(int number[])
+
+/* MAIN */
+int main()
 {
-    for(int i = 0; i < size_of_number; i++){
-      number[i] = 0;}
+    int number[size_of_number]; //The number is treated as an array of single digits, rather than an int data type
+    int sum;
+    initialise(number);
+    factorial(number, question);
+    //Getting the sum of the digits of the number
+    sum = sum_of_digits(number);
+    printf("The sum of the digits of %d! is: %d \n",question, sum);
+    return 0;
 }
 
-//Finding the factorial by multiplying the digits
+/* Definitions */
+
+// Initially, the number is 0 so all it's digits are set to zero.
+void initialise(int number[])
+{
+    for(int i = 0; i < size_of_number; i++)
+    {
+      number[i] = 0;
+    }
+}
+
+// Finding the factorial by multiplying the digits
 void factorial(int number[], int num)
 {
     int i, first_digit;
@@ -45,7 +62,7 @@ void factorial(int number[], int num)
         for(i = 0; i <= first_digit; i++)
         {
             product = num*number[i] + carry;
-            replace = product%base; //Replace is what should be rewritten in the ith digit
+            replace = product%base; //Replace is what should be rewritten in the i:th digit
             carry = product/base; //Carry needs to be added when num is multiplied with the next most significant digit
 
             //The ith digit of number is rewritten now as the product%base we're working in. This case - 10
@@ -75,15 +92,4 @@ int sum_of_digits(int number[])
 }
 
 
-//MAIN
-int main()
-{
-    int number[size_of_number]; //The number is treated as an array of single digits, rather than an int data type
-    int sum;
-    initialise(number);
-    factorial(number, question);
-    //Getting the sum of the digits of the number
-    sum = sum_of_digits(number);
-    printf("The sum of the digits of %d! is %d.\n",question, sum);
-    return 0;
-}
+/*ANSWER The sum of the digits of 100! is 648 . */
