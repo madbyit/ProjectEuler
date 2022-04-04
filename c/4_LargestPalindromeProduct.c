@@ -1,13 +1,15 @@
+/*
+PROBLEM:
+The prime factors of 13195 are 5, 7, 13 and 29.
+What is the largest prime factor of the number 600851475143 ?
+*/
 
 #include <stdio.h>
-//The prime factors of 13195 are 5, 7, 13 and 29.What is the largest prime factor of the number 600851475143 ?
 
-//Declarations
-
+// Declarations
 static int is_palindromic(unsigned int n);
 
-
-//MAIN
+// MAIN
 int main(void)
 {
   unsigned int val1, val2, largestpalindrome = 0;
@@ -27,8 +29,7 @@ int main(void)
   return 0;
 }
 
-
-//Definitions
+// Definitions
 int is_palindromic(unsigned int n)
 {
   unsigned int reversed = 0, t = n;
