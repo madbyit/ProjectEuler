@@ -7,41 +7,6 @@ and the sum of the digits in the number 10! is 3 + 6 + 2 + 8 + 8 + 0 + 0 = 27.
 Find the sum of the digits in the number 100!
 */
 
-/*
-#include <stdio.h>
-#include <string.h>
-
-int main()
-{
-  int sum = 0;
-  int factordigit = 10;
-  long long factor = factordigit;
-  char str[20];
-
-
-
-//Factoring n*(n-1)*(n-2)..*3*2*1.
-  for (int i = factordigit-1; i > 0; i--)
-  {
-    factor *= i;
-  }
-
-
-
-
-sprintf(str, "%lld", factor);
-
-for (int j = 0; j < strlen(str); j++)
-{
-  sum += str[j]-'0';
-}
-
-printf("Sum of the digits in the factor %lld = %d\n", factor, sum);
-  return 0;
-}
-*/
-
-
 #include <stdio.h>
 #include <stdlib.h>
 

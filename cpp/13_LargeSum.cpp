@@ -112,14 +112,14 @@ int main()
 
  int i = 0;
  int j = 0;
- int ud_stop = SIZE >> 1;
+ int ud_stop = ROW >> 1;
  int lr_stop = DIGITS >> 1;
 
  for (i = 0; i < ud_stop ; i++)
  {
   for ( j = 0; j < lr_stop; j++)
   {
-   int lower_index = SIZE - 1 - i;
+   int lower_index = ROW - 1 - i;
    int right_index = DIGITS - 1 - j;
 
    sums[j] += *(numbers[i] + j) + *(numbers[lower_index] + j) - '0' - '0';
