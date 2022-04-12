@@ -9,35 +9,36 @@ Find the sum of the digits in the number 100!
 
 #include <stdio.h>
 #include <stdlib.h>
+#include <time.h>
 
-/* Declarations and definitions */
-#define size_of_number 160
-#define question 100
+/* Declarations */
+#define sizeOfNumber 160
+#define startVal 100
 #define base 10
-void initialise(int[]);
-int sum_of_digits(int[]);
+void init(int[]);
 void factorial(int[],int);
-
+int sumOfDigits(int[]);
 
 /* MAIN */
 int main()
 {
-    int number[size_of_number]; //The number is treated as an array of single digits, rather than an int data type
+    int number[sizeOfNumber]; //The number is treated as an array of single digits
     int sum;
-    initialise(number);
-    factorial(number, question);
+    init(number);
+    int num = startVal;
+    factorial(number, num);
     //Getting the sum of the digits of the number
-    sum = sum_of_digits(number);
-    printf("The sum of the digits of %d! is: %d \n",question, sum);
+    sum = sumOfDigits(number);
+    printf("The sum of the digits of %d! is: %d \n", startVal, sum);
     return 0;
 }
 
 /* Definitions */
 
 // Initially, the number is 0 so all it's digits are set to zero.
-void initialise(int number[])
+void init(int number[])
 {
-    for(int i = 0; i < size_of_number; i++)
+    for(int i = 0; i < sizeOfNumber; i++)
     {
       number[i] = 0;
     }
@@ -46,50 +47,49 @@ void initialise(int number[])
 // Finding the factorial by multiplying the digits
 void factorial(int number[], int num)
 {
-    int i, first_digit;
-    int carry, replace, product;
+    int i, msd, carry, replaceIndex, product;
 
-    //First digit keeps track of the position of the 'most significant digit' in the array - where the trailing zeroes end.
-    first_digit = 0;
-    number[first_digit] = 1; //If we don't do this, the answer will be 0.
-
+    //'msd' keeps track of the position of the 'most significant digit' [msd] in the array - where the trailing zeroes end.
+    msd = 0;
+    number[msd] = 1; //If we don't do this, the answer will be 0.
+    
     //This while loop calculates num! and stores it in number[]
-    while(num != 1)
+    do
     {
         //This block performs multiplication of number[] with the current value of num and stores the result in num
-        //The multiplication is done like how we normally do it by hand.
+        //The factorisation is done like how we do it by hand using carry
         carry = 0;
-        for(i = 0; i <= first_digit; i++)
+        for(i = 0; i <= msd; i++)
         {
             product = num*number[i] + carry;
-            replace = product%base; //Replace is what should be rewritten in the i:th digit
+
+            replaceIndex = product%base;
+
             carry = product/base; //Carry needs to be added when num is multiplied with the next most significant digit
 
             //The ith digit of number is rewritten now as the product%base we're working in. This case - 10
-            number[i] = replace;
+            number[i] = replaceIndex;
 
-            //If there is a carry in the MSB, then the number of digits will increase. For example, 112x10 = 1120. There is a carry in the MSB.
-            if( (i == first_digit) && (carry > 0) )
+            // There is a carry in the MSD.
+            if( (i == msd) && (carry > 0) )
             {
-                first_digit++;
+                msd++;
             }
         }
-
         num--;
-    }
+    }while(num != 1);
 }
 
 //Finding the sum of all digits
-int sum_of_digits(int number[])
+int sumOfDigits(int number[])
 {
     int i, sum = 0;
     //All the digits are initialised to zero so we don't need to know where MSB is to avoid extra terms being added
-    for(i = 0; i < size_of_number; i++)
+    for(i = 0; i < sizeOfNumber; i++)
     {
         sum = sum + number[i];
     }
     return sum;
 }
-
 
 /*ANSWER The sum of the digits of 100! is 648 . */
